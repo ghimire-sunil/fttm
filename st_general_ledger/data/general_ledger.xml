@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record model="ir.model.data" id="general_ledger_report_data">
+            <field name="name">general_ledger_report</field>
+            <field name="model">account.report</field>
+            <field name="res_id" ref="account_reports.general_ledger_report"/>
+        </record>
+
+
+        <record id="opening_balance_col_gl" model="account.report.column">
+            <field name="report_id" ref="account_reports.general_ledger_report"/>
+            <field name="name">Opening Balance</field>
+            <field name="sequence">50</field>
+            <field name="figure_type">monetary</field>
+            <field name="blank_if_zero">True</field>
+            <field name="sortable">True</field>
+            <field name="expression_label">opening_balance</field>
+        </record>
+    </data>
+</odoo>
+

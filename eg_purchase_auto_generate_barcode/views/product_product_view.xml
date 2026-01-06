@@ -1,0 +1,18 @@
+<odoo>
+    <record model="ir.ui.view" id="product_product_barcode_form_view">
+        <field name="name">product.product.barcode.form</field>
+        <field name="model">product.product</field>
+        <field name="inherit_id" ref="product.product_normal_form_view"/>
+        <field name="arch" type="xml">
+            <xpath expr="//field[@name='barcode']" position="replace">
+                <label for="barcode"/>
+                <div name="barcode_generate">
+                    <field name="barcode" class="oe_inline"/>
+                    <button type="object" class="fa fa-arrow-right oe_link" name="generate_barcode" invisible="barcode"/>
+                </div>
+                <button name="generate_barcode_image" type="object" class="oe_highlight" string="Barcode Image"/>
+                <field name="barcode_image" widget="image"/>
+            </xpath>
+        </field>
+    </record>
+</odoo>

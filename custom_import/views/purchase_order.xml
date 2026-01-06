@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record id="view_purchase_order_file_upload_wizard_form" model="ir.ui.view">
+            <field name="name">purchase.order.file.upload.wizard.form</field>
+            <field name="model">purchase.order.file.upload.wizard</field>
+            <field name="arch" type="xml">
+                <form string="Upload File">
+                    <sheet>
+
+                        <group>
+                            <group>
+                                <field name="purchase_order_id" invisible="1"/>
+                                <field name="file_data" filename="file_name"/>
+                                <field name="file_name" invisible="1"/>
+                                <field name="file_type" readonly="1"/>
+                            </group>
+                        </group>
+                        
+                        <notebook>
+                            <page string="Format Instructions">
+                                <group>
+                                    <div style="padding: 15px; background-color: #f0f8ff; border: 1px solid #4a90e2; border-radius: 5px;">
+                                        <h3 style="color: #2c3e50; margin-top: 0;">Supported File Formats:</h3>
+                                        <ul style="line-height: 1.8;">
+                                            <li><strong>CSV Files (.csv):</strong> Comma-separated values with headers in the first row</li>
+                                            <li><strong>Excel Files (.xlsx, .xls):</strong> Excel workbook with data in the first sheet</li>
+                                        </ul>
+                                        
+                                        <h3 style="color: #2c3e50;">Excel Format:</h3>
+                                         <pre style="background-color:rgb(255, 255, 255); color:rgb(5, 5, 5); padding: 10px; border-radius: 3px; overflow-x: auto;">
+                                         <table class ="table table-bordered">
+                                         <thead style="background-color:rgb(226, 239, 255);">
+                                            <tr>
+                                                <th><b>Order Reference</b></th>
+                                                <th><b>Customer</b></th>
+                                                <th><b>Company</b></th>
+                                                <th><b>Order Date</b></th>
+                                                <th><b>Order Lines/Product</b></th>
+                                                <th><b>Order Lines/Product/Barcode</b></th>
+                                                <th><b>Order Lines/Quantity</b></th>
+                                                <th><b>Order Lines/Unit Price</b></th>
+                                                <th><b>Order Lines/Unit</b></th>
+                                                <th><b>Order Lines/Discount</b></th>
+                                                <th><b>Order Lines/Taxes</b></th>
+                                            </tr>
+                                         </thead>
+                                         <tbody>
+                                            <tr>
+                                                <td>P00019</td>
+                                                <td>test</td>
+                                                <td>FITIM</td>
+                                                <td>2025-10-29 15:41:11</td>
+                                                <td>test (BLUE)</td>
+                                                <td>540000002280443</td>
+                                                <td>1.00</td>
+                                                <td>1.00</td>
+                                                <td>Piece</td>
+                                                <td>10.00</td>
+                                                <td>13.00</td>
+                                            </tr>
+                                         </tbody>
+                                         </table>
+                                            </pre>
+                                        <h3 style="color: #2c3e50;">Column Descriptions:</h3>
+                                        <ul style="line-height: 1.8;">
+                                            <li><strong>Order Reference:</strong> PO reference number (e.g., P00019) <i>Not Compulsory</i></li>
+                                            <li><strong>Customer:</strong> Customer name</li>
+                                            <li><strong>Company:</strong> Company name</li>
+                                            <li><strong>Order Date:</strong> Date and time (YYYY-MM-DD HH:MM:SS format)</li>
+                                            <li><strong>Order Lines/Product:</strong> Product name with variant (e.g., test (BLUE))</li>
+                                            <li><strong>Order Lines/Product/Barcode:</strong> Product barcode</li>
+                                            <li><strong>Order Lines/Quantity:</strong> Quantity ordered</li>
+                                            <li><strong>Order Lines/Unit Price:</strong> Unit price</li>
+                                            <li><strong>Order Lines/Unit:</strong> Unit of measure (e.g., Piece)</li>
+                                            <li><strong>Order Lines/Discount:</strong> Discount percentage (e.g., 10.00)</li>
+                                            <li><strong>Order Lines/Taxes:</strong> Tax percentage (e.g., 13.00)</li>
+                                        </ul>
+                                        
+                                        <h3 style="color: #2c3e50;">Important Notes:</h3>
+                                        <ul style="line-height: 1.8;">
+                                            <li>First row must contain exact column headers as shown above</li>
+                                            <li>Date format must be: YYYY-MM-DD HH:MM:SS</li>
+                                            <li>Remove any empty rows at the end</li>
+                                        </ul>
+
+
+                                        <div style="margin-top: 15px; padding: 10px; background-color: #fff3cd; border-left: 4px solid #ffc107;">
+                                            <strong>⚠️ Warning:</strong> Invalid file format or missing data will cause upload to fail.
+                                        </div>
+                                    </div>
+                                </group>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <footer>
+                        <button string="Import" 
+                                name="action_upload_file" 
+                                type="object" 
+                                class="btn-primary"
+                                data-hotkey="q"/>
+                        <button string="Cancel" 
+                                class="btn-secondary" 
+                                special="cancel"
+                                data-hotkey="z"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <record id="view_purchase_order_tree_inherit_upload_button" model="ir.ui.view">
+            <field name="name">purchase.order.tree.inherit.upload.button</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_kpis_tree"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="action_open_file_upload_wizard" 
+                        string="Import purchases Order" 
+                        type="object" 
+                        class="oe_highlight"
+                        icon="fa-upload"
+                        display="always" 
+                        />
+                </header>          
+         
+            </field>
+        </record>
+        <record id="view_purchase_order_tree_inherit_import_button" model="ir.ui.view">
+            <field name="name">purchase.order.tree.inherit.import.button</field>
+            <field name="model">purchase.order</field>
+            <field name="inherit_id" ref="purchase.purchase_order_view_tree"/>
+            <field name="arch" type="xml">
+                <header>
+                    <button name="action_open_file_upload_wizard" 
+                        string="Import purchases Order" 
+                        type="object" 
+                        class="oe_highlight"
+                        icon="fa-upload"
+                        display="always" 
+                        />
+                </header>          
+         
+            </field>
+        </record>
+        
+
+        <record id="action_purchase_order_file_upload_wizard" model="ir.actions.act_window">
+            <field name="name">Upload File to purchase Order</field>
+            <field name="res_model">purchase.order.file.upload.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="target">new</field>
+        </record>
+
+    </data>
+</odoo>
