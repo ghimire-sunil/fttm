@@ -93,7 +93,21 @@ class AccountMoveInherited(models.Model):
         string="Transaction Amount", default=0.0, help="Amount of transaction if any"
     )
     move_type = fields.Selection(
-        selection_add=[("in_refund", "Vendor Debit Note")],
+        selection=[
+            ('entry', 'Journal Entry'),
+            ('out_invoice', 'Customer Invoice'),
+            ('out_refund', 'Customer Credit Note'),
+            ('in_invoice', 'Vendor Bill'),
+            ('in_refund', 'Vendor Debit Note'),
+            ('out_receipt', 'Sales Receipt'),
+            ('in_receipt', 'Purchase Receipt'),
+        ],
+        string='Type',
+        required=True,
+        tracking=True,
+        change_default=True,
+        index=True,
+        default="entry",
     )
     tds_amount = fields.Float(string="TDS Amount", compute="_compute_tds_amount")
     tax_amount = fields.Float(
