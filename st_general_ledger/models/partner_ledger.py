@@ -169,4 +169,5 @@ class AccountMoveInherited(models.Model):
         change_default=True,
         index=True,
         default="entry",
+        readonly=False
     )
